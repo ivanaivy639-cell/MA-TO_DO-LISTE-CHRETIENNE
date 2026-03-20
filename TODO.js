@@ -75,6 +75,6 @@ function login() {
   if (!email) {
       alert("Veuillez entrer votre adresse email.");
     } else {
-    alert("Bienvenue, " + email + " !");
+    alert("Connexion reussit !");
   };
 }
