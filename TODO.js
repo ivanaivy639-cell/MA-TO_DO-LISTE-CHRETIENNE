@@ -3,18 +3,18 @@ const loginForm = document.getElementById("loginForm");
 
 if (presentation) {
   const lines = [
-    { tag: "h2", html: "Bienvenue" },
+    { tag: "h2", html: "Bienvenue ✨" },
     {
       tag: "p",
       className: "intro",
-      html: 'Bonjour et bienvenue sur votre <strong>Todo List Chretienne</strong>.'
+      html: 'Bonjour et bienvenue sur votre <strong>Todo List Chretienne</strong> 🌸.'
     },
-    { tag: "p", html: "Cette application vous aide a organiser, dans la paix et la clarte :" },
-    { tag: "p", html: "Vos moments de priere" },
-    { tag: "p", html: "Vos lectures bibliques" },
-    { tag: "p", html: "Vos meditations" },
-    { tag: "p", html: "Vos taches personnelles" },
-    { tag: "p", className: "blessing", html: "Que Dieu benisse votre journee." }
+    { tag: "p", html: "Cette application vous aide a organiser, dans la paix et la clarte 🙏 :" },
+    { tag: "p", html: "📖 Vos moments de priere" },
+    { tag: "p", html: "📚 Vos lectures bibliques" },
+    { tag: "p", html: "🕊️ Vos meditations" },
+    { tag: "p", html: "📝 Vos taches personnelles" },
+    { tag: "p", className: "blessing", html: "Que Dieu benisse votre journee 🌷." }
   ];
 
   const speed = 34;
