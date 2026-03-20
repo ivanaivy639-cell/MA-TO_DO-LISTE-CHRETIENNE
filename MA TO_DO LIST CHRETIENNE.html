@@ -1,0 +1,37 @@
+﻿<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MA TO_DO LIST CHRETIENNE</title>
+    <link rel="stylesheet" href="TODO.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section id="section1" class="hero-section">
+            <div class="presentation-card">
+                <div id="presentation" class="presentation" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section id="section2" class="login-section">
+            <div id="login" class="login-card">
+                <h2>Connexion</h2>
+                <p class="login-subtitle">Accedez a votre espace personnel en toute simplicite.</p>
+                <form id="loginForm" class="login-form">
+                    <input type="email" id="email" placeholder="Entrez votre email" required>
+                    <button onclick="login()">Se connecter</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="essayer-gratuit" class="essayer-section">
+            <div id="essayer-gratuit-card" class="essayer-card">
+                <button type="button" class="essayer-btn">Essayer gratuit</button>
+            </div>
+        </section>
+    </main>
+
+    <script src="TODO.js"></script>
+</body>
+</html>
