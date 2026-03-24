@@ -1,5 +1,7 @@
 ﻿const presentation = document.getElementById("presentation");
 const loginForm = document.getElementById("loginForm");
+const essayerBtn = document.getElementById("essayerBtn");
+
 
 if (presentation) {
   const lines = [
@@ -9,7 +11,7 @@ if (presentation) {
       className: "intro",
       html: 'Bonjour et bienvenue sur votre <strong>Todo List Chretienne</strong> 🌸.'
     },
-    { tag: "p", html: "Cette application vous aide a organiser, dans la paix et la clarte 🙏 :" },
+    { tag: "p", html: "Cette application vous aide a organiser, dans la paix et la clarte 🙏🏿 :" },
     { tag: "p", html: "📖 Vos moments de priere" },
     { tag: "p", html: "📚 Vos lectures bibliques" },
     { tag: "p", html: "🕊️ Vos meditations" },
@@ -77,4 +79,8 @@ function login() {
     } else {
     alert("Connexion reussit !");
   };
+}
+function essayer() {
+    alert("Merci d'essayer l'application ! Nous espérons qu'elle vous aidera à organiser votre vie spirituelle et personnelle. Que Dieu vous bénisse ! 🌟");
+    window.location.href = "accueil.html";
 }
