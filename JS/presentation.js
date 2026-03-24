@@ -13,7 +13,7 @@ if (presentation) {
     },
     { tag: "p", html: "Cette application vous aide a organiser, dans la paix et la clarte 🙏🏿 :" },
     { tag: "p", html: "📖 Vos moments de priere" },
-    { tag: "p", html: "📚 Vos lectures bibliques" },
+    { tag: "p", html: "📚 Vos etudes bibliques" },
     { tag: "p", html: "🕊️ Vos meditations" },
     { tag: "p", html: "📝 Vos taches personnelles" },
     { tag: "p", className: "blessing", html: "Que Dieu benisse votre journee 🌷." }

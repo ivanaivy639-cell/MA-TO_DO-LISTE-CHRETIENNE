@@ -1,0 +1,233 @@
+:root {
+  --text: #5d4650;
+  --text-muted: #856a75;
+  --accent: #b6848f;
+  --accent-strong: #8f5f6d;
+  --card-bg: rgba(255, 255, 255, 0.56);
+  --card-border: rgba(182, 132, 143, 0.18);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: "Palatino Linotype", Georgia, serif;
+  color: var(--text);
+  background:
+    radial-gradient(circle at top left, rgba(255, 246, 233, 0.98) 0%, rgba(255, 246, 233, 0) 28%),
+    radial-gradient(circle at top center, rgba(247, 240, 243, 0.95) 0%, rgba(247, 240, 243, 0) 34%),
+    radial-gradient(circle at top right, rgba(234, 215, 223, 0.9) 0%, rgba(234, 215, 223, 0) 30%),
+    linear-gradient(180deg, #faf6f3 0%, #f0e6ea 54%, #eee3e8 100%);
+}
+
+body {
+  padding: 38px 24px;
+}
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  border-radius: 999px;
+  pointer-events: none;
+  filter: blur(14px);
+  opacity: 0.5;
+}
+
+body::before {
+  top: 14%;
+  left: 7%;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0));
+}
+
+body::after {
+  right: 8%;
+  bottom: 12%;
+  width: 280px;
+  height: 280px;
+  background: radial-gradient(circle, rgba(217, 190, 161, 0.25), rgba(217, 190, 161, 0));
+}
+
+.planning-shell {
+  width: min(520px, 100%);
+  margin: 0 auto;
+}
+
+.planning-card {
+  border: 1px solid rgba(182, 132, 143, 0.16);
+  border-radius: 20px;
+  padding: 16px 14px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 24px rgba(143, 95, 109, 0.1);
+}
+
+.planning-card h1 {
+  margin: 0 0 12px;
+  color: var(--accent-strong);
+  font-size: clamp(1.3rem, 3vw, 1.65rem);
+}
+
+.task {
+  border: 1px solid rgba(182, 132, 143, 0.16);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.95);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.task-title {
+  list-style: none;
+  padding: 11px 14px;
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.task-title::-webkit-details-marker {
+  display: none;
+}
+
+.task-title::after {
+  content: "+";
+  font-size: 1rem;
+  line-height: 1;
+  color: var(--text-muted);
+}
+
+.task[open] .task-title {
+  border-bottom: 1px solid rgba(182, 132, 143, 0.18);
+  background: rgba(182, 132, 143, 0.06);
+}
+
+.task[open] .task-title::after {
+  content: "-";
+}
+
+.task-name {
+  flex: 1;
+}
+
+.task-meta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 24px;
+  padding: 0 10px;
+  border-radius: 999px;
+  background: rgba(182, 132, 143, 0.12);
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  letter-spacing: 0.02em;
+}
+
+.task-form {
+  display: grid;
+  gap: 8px;
+  padding: 10px 12px 12px;
+}
+
+.field {
+  display: grid;
+  gap: 4px;
+}
+
+.field-full {
+  grid-column: 1 / -1;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.field-row-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.task-form label {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-muted);
+}
+
+.task-form input {
+  width: 100%;
+  min-height: 34px;
+  padding: 7px 10px;
+  border: 1px solid rgba(182, 132, 143, 0.22);
+  border-radius: 9px;
+  background: #fffdfd;
+  font: inherit;
+  font-size: 0.92rem;
+  color: var(--text);
+}
+
+.task-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 6px;
+  margin-top: 2px;
+  flex-wrap: wrap;
+}
+
+.save,
+.cancel {
+  min-height: 32px;
+  padding: 0 10px;
+  border: 0;
+  border-radius: 9px;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.save {
+  background: linear-gradient(135deg, #bb8793 0%, #9e6d7a 100%);
+  color: #fff;
+}
+
+.cancel {
+  background: rgba(143, 95, 109, 0.12);
+  color: var(--accent-strong);
+}
+
+@media (max-width: 680px) {
+  body {
+    padding: 24px 16px;
+  }
+
+  .planning-card {
+    padding: 16px 14px;
+  }
+
+  .field-full {
+    grid-column: auto;
+  }
+
+  .field-row,
+  .field-row-two {
+    grid-template-columns: 1fr;
+  }
+
+  .task-title {
+    padding: 12px;
+  }
+
+  .task-meta {
+    padding: 0 8px;
+    font-size: 0.7rem;
+  }
+}

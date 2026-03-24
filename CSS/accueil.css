@@ -100,13 +100,13 @@ body::after {
   margin: 0.55rem 0;
 }
 
-.pannifions-section {
+.plannifions-section {
   width: min(620px, calc(100% - 48px));
   margin: -350px 0 0 24px;
   z-index: 02;
 }
 
-.pannifions-card {
+.plannifions-card {
   width: 100%;
   padding: 28px 24px;
   border-radius: 28px;
@@ -117,13 +117,13 @@ body::after {
   text-align: left;
 }
 
-.pannifions-card h2 {
+.plannifions-card h2 {
   margin: 0;
   color: var(--accent-strong);
   font-size: clamp(1.8rem, 3vw, 2.4rem);
 }
 
-.pannifions-subtitle {
+.plannifions-subtitle {
   margin: 10px 0 22px;
   color: var(--text-muted);
   font-size: 1rem;
@@ -135,7 +135,7 @@ body::after {
   gap: 14px;
 }
 
-.pannifions-btn {
+.plannifions-btn {
   width: 100%;
   min-height: 58px;
   padding: 0 20px;
@@ -151,7 +151,7 @@ body::after {
   box-shadow: 0 12px 24px rgba(143, 95, 109, 0.18);
 }
 
-.pannifions-btn:hover {
+.plannifions-btn:hover {
   transform: translateY(-1px);
 }
 
@@ -205,7 +205,7 @@ body::after {
     padding: 20px 16px;
   }
 
-  .pannifions-section {
+  .plannifions-section {
     width: calc(100% - 32px);
     margin: 10px 16px 0;
   }

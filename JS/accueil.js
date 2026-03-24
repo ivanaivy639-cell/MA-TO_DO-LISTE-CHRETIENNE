@@ -1,5 +1,5 @@
 const motivation = document.getElementById("motivation");
-
+const plannifionsBtn = document.getElementById("plannifionsBtn");
 if (motivation) {
   const lines = [
     {
@@ -61,4 +61,11 @@ if (motivation) {
   };
 
   typeLine();
+}
+function commencer() {
+  window.location.href = "commencer.html";
+}
+
+function predefini() {
+  alert("La version predefinie n'est pas encore disponible.");
 }
