@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commencer</title>
+    <link rel="stylesheet" href="CSS/commencer.css">
+</head>
+<body>
+    <main class="planning-shell">
+        <section class="planning-card">
+            <h1>Vos taches</h1>
+            <details class="task">
+                <summary class="task-title">
+                    <span class="task-name">Etude biblique</span>
+                    <span class="task-meta">Lecture</span>
+                </summary>
+                <div class="task-form">
+                    <div class="field field-full">
+                        <label for="texte-biblique">Texte biblique :</label>
+                        <input type="text" id="texte-biblique" name="texte-biblique" placeholder="Entrez le passage biblique">
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="date-etude">Date :</label>
+                            <input type="date" id="date-etude" name="date-etude">
+                        </div>
+                        <div class="field">
+                            <label for="time-etude">Debut :</label>
+                            <input type="time" id="time-etude" name="time-etude" value="00:00">
+                        </div>
+                        <div class="field">
+                            <label for="time">Fin :</label>
+                            <input type="time" id="time" name="time" placeholder="hh:mm" value="23:00">
+                        </div>
+                    </div>
+
+                    <div class="task-actions">
+                        <button type="button" class="save">Enregistrer</button>
+                        <button type="button" class="cancel">Annuler</button>
+                    </div>
+                </div>
+            </details>
+
+            <details class="task">
+                <summary class="task-title">
+                    <span class="task-name">Meditation</span>
+                    <span class="task-meta">Calme</span>
+                </summary>
+                <div class="task-form">
+                    <div class="field field-full">
+                        <label for="theme-meditation">Theme :</label>
+                        <input type="text" id="theme-meditation" name="theme-meditation" placeholder="Entrez le theme">
+                    </div>
+
+                    <div class="field-row field-row-two">
+                        <div class="field">
+                            <label for="date-meditation">Date :</label>
+                            <input type="date" id="date-meditation" name="date-meditation">
+                        </div>
+                        <div class="field">
+                            <label for="time-meditation">debut :</label>
+                            <input type="time" id="time-meditation" name="time-meditation" value="00:00">
+                        </div>
+                        <div class="field">
+                            <label for="time-meditation-end">Fin :</label>
+                            <input type="time" id="time-meditation-end" name="time-meditation-end" value="23:00">
+                        </div>
+                    </div>
+
+                    <div class="task-actions">
+                        <button type="button" class="save">Enregistrer</button>
+                        <button type="button" class="cancel">Annuler</button>
+                    </div>
+                </div>
+            </details>
+
+            <details class="task">
+                <summary class="task-title">
+                    <span class="task-name">Tache personnelle</span>
+                    <span class="task-meta">Journee</span>
+                </summary>
+                <div class="task-form">
+                    <div class="field field-full">
+                        <label for="titre-tache">Tache :</label>
+                        <input type="text" id="titre-tache" name="titre-tache" placeholder="Entrez votre tache">
+                    </div>
+
+                    <div class="field-row">
+                        <div class="field">
+                            <label for="date-tache">Date :</label>
+                            <input type="date" id="date-tache" name="date-tache">
+                        </div>
+                        <div class="field">
+                            <label for="time-tache"> heure Debut :</label>
+                            <input type="time" id="time-tache" name="time-tache" value="00:00">
+                        </div>
+                        <div class="field">
+                            <label for="time-tache-end"> heure Fin :</label>
+                            <input type="time" id="time-tache-end" name="time-tache-end" value="23:59">
+                        </div>
+                      </div>
+
+                    <div class="task-actions">
+                        <button type="button" class="save">Enregistrer</button>
+                        <button type="button" class="cancel">Annuler</button>
+                    </div>
+                </div>
+            </details>
+        </section>
+    </main>
+</body>
+</html>
