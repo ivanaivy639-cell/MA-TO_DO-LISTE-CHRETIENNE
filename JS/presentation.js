@@ -73,12 +73,7 @@ if (presentation) {
   typeLine();
 }
 function login() {
-    const email = document.getElementById("email").value;
-  if (!email) {
-      alert("Veuillez entrer votre adresse email.");
-    } else {
-    alert("Connexion reussit !");
-  };
+  return false;
 }
 function essayer() {
     alert("Merci d'essayer l'application ! Nous espérons qu'elle vous aidera à organiser votre vie spirituelle et personnelle. Que Dieu vous bénisse ! 🌟");
