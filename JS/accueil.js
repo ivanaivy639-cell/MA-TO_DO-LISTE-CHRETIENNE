@@ -62,3 +62,12 @@ if (motivation) {
 
   typeLine();
 }
+
+function plannifions() {
+  window.location.href = "commencer.html";
+}
+
+function pannifions() {
+  window.location.href = "commencer.html";
+}
+
