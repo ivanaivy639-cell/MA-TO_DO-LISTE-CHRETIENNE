@@ -36,7 +36,8 @@ async function login() {
     alert(data.message || "Requete envoyee.");
 
     if (response.ok && data.success) {
-      inscriptionForm?.reset();
+       document.getElementById("loginForm").reset();
+       window.location.href = "accueil.html";
     }
   } catch (error) {
     alert("Impossible de contacter le serveur PHP ou la base de donnees.");
