@@ -1,6 +1,7 @@
 document.querySelectorAll(".save").forEach(function(button) {
   button.addEventListener("click", function(e) {
     e.preventDefault();
+    
 
     const taskBox = button.closest(".task");
     const type = taskBox.querySelector(".task-name").textContent.trim();
@@ -13,8 +14,8 @@ document.querySelectorAll(".save").forEach(function(button) {
     const debut = timeInputs[0] ? timeInputs[0].value : "";
     const fin = timeInputs[1] ? timeInputs[1].value : "";
 
-    if (!context && !date && !debut && !fin) {
-      alert("Veuillez remplir au moins un champ.");
+    if (!context || !date || !debut || !fin) {
+      alert("Veuillez remplir tous les champs.");
       return;
     }
 
@@ -33,6 +34,11 @@ document.querySelectorAll(".save").forEach(function(button) {
     })
     .then(data => {
       alert(data.message);
+      if (data.success) {
+        textInput.value = "";
+        dateInput.value = "";
+        timeInputs.forEach(input => input.value = "");
+      }
     })
     .catch(error => {
       console.error(error);
@@ -40,3 +46,15 @@ document.querySelectorAll(".save").forEach(function(button) {
     });
   });
 });
+document.querySelectorAll(".cancel").forEach(function(button) {
+  button.addEventListener("click", function(e) {
+    if (confirm("Voulez-vous vraiment annuler cette tache ?")) {
+      const taskBox = button.closest(".task");
+      taskBox.querySelector('input[type="text"]').value = "";
+      taskBox.querySelector('input[type="date"]').value = "";
+      taskBox.querySelectorAll('input[type="time"]').forEach(input => input.value = "");
+
+      
+    }   
+  }
+)});
