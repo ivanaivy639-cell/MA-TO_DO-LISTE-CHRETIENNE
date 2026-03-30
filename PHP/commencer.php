@@ -14,5 +14,8 @@ $fin = $data["fin"] ?? null;
 $stmt = $conn->prepare("INSERT INTO task (type, context, date, debut, fin) VALUES (?, ?, ?, ?, ?)");
 $stmt->execute([$type, $context, $date ?: null, $debut ?: null, $fin ?: null]);
 
-echo json_encode(["message" => "tache ajoutee avec succes"]);
+echo json_encode([
+    "success" => true,
+    "message" => "tache ajoutee avec succes"
+]);
 ?>
