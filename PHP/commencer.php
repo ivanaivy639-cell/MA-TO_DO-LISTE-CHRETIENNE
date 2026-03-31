@@ -1,21 +1,48 @@
 <?php
-require "bd.php";
-session_start();
-
 header("Content-Type: application/json; charset=UTF-8");
 
-$data = json_decode(file_get_contents("php://input"), true);
-$type = $data["type"] ?? null;
-$context = $data["context"] ?? null;
-$date = $data["date"] ?? null;
-$debut = $data["debut"] ?? null;
-$fin = $data["fin"] ?? null;
+require "bd.php";
 
-$stmt = $conn->prepare("INSERT INTO task (type, context, date, debut, fin) VALUES (?, ?, ?, ?, ?)");
-$stmt->execute([$type, $context, $date ?: null, $debut ?: null, $fin ?: null]);
+try {
+    $data = json_decode(file_get_contents("php://input"), true);
 
-echo json_encode([
-    "success" => true,
-    "message" => "tache ajoutee avec succes"
-]);
+    if (!is_array($data)) {
+        http_response_code(400);
+        echo json_encode([
+            "success" => false,
+            "message" => "Donnees invalides."
+        ]);
+        exit();
+    }
+
+    $type = trim($data["type"] ?? "");
+    $context = trim($data["context"] ?? "");
+    $date = trim($data["date"] ?? "");
+    $debut = trim($data["debut"] ?? "");
+    $fin = trim($data["fin"] ?? "");
+
+    if ($context === "" || $date === "" || $debut === "" || $fin === "") {
+        http_response_code(400);
+        echo json_encode([
+            "success" => false,
+            "message" => "Veuillez remplir tous les champs."
+        ]);
+        exit();
+    }
+
+    $stmt = $conn->prepare("INSERT INTO task (type, context, date, debut, fin) VALUES (?, ?, ?, ?, ?)");
+    $stmt->execute([$type, $context, $date, $debut, $fin]);
+
+    echo json_encode([
+        "success" => true,
+        "message" => "tache ajoutee avec succes"
+    ]);
+} catch (Throwable $error) {
+    http_response_code(500);
+    echo json_encode([
+        "success" => false,
+        "message" => "Erreur lors de l'enregistrement.",
+        "error" => $error->getMessage()
+    ]);
+}
 ?>
