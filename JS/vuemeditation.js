@@ -17,8 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const saveButton = document.getElementById("save-meditation");
     const storageTaskKey = "activeMeditationTask";
     const completedTasksKey = "completedMeditationTasks";
+    const activationHistoryKey = "meditationTaskActivations";
+    const meditationLifetimeMs = 24 * 60 * 60 * 1000;
 
     let activeTask = null;
+    let expirationTimerId = null;
 
     const setStatus = (message, statusClass) => {
         statusBox.textContent = message;
@@ -35,6 +38,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const hideSheet = () => {
         sheet.classList.add("is-hidden");
+    };
+
+    const clearExpirationTimer = () => {
+        if (expirationTimerId) {
+            window.clearTimeout(expirationTimerId);
+            expirationTimerId = null;
+        }
     };
 
     const clearSheet = () => {
@@ -132,6 +142,120 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    const getActivationHistory = () => {
+        const raw = localStorage.getItem(activationHistoryKey);
+
+        if (!raw) {
+            return {};
+        }
+
+        try {
+            const parsed = JSON.parse(raw);
+            return parsed && typeof parsed === "object" ? parsed : {};
+        } catch (error) {
+            localStorage.removeItem(activationHistoryKey);
+            return {};
+        }
+    };
+
+    const saveActivationHistory = (history) => {
+        localStorage.setItem(activationHistoryKey, JSON.stringify(history));
+    };
+
+    const getTaskActivationTimestamp = (taskId) => {
+        if (!taskId) {
+            return null;
+        }
+
+        const history = getActivationHistory();
+        const activationTimestamp = history[String(taskId)];
+        return typeof activationTimestamp === "number" ? activationTimestamp : null;
+    };
+
+    const setTaskActivationTimestamp = (taskId, timestamp) => {
+        if (!taskId) {
+            return null;
+        }
+
+        const history = getActivationHistory();
+        const normalizedTaskId = String(taskId);
+        const normalizedTimestamp = typeof timestamp === "number" ? timestamp : Date.now();
+
+        history[normalizedTaskId] = normalizedTimestamp;
+        saveActivationHistory(history);
+
+        return normalizedTimestamp;
+    };
+
+    const removeTaskActivationTimestamp = (taskId) => {
+        if (!taskId) {
+            return;
+        }
+
+        const history = getActivationHistory();
+        const normalizedTaskId = String(taskId);
+
+        if (Object.prototype.hasOwnProperty.call(history, normalizedTaskId)) {
+            delete history[normalizedTaskId];
+            saveActivationHistory(history);
+        }
+    };
+
+    const getTaskExpirationTimestamp = (task) => {
+        if (!task || !task.id) {
+            return null;
+        }
+
+        const activationTimestamp = getTaskActivationTimestamp(task.id);
+
+        if (!activationTimestamp) {
+            return null;
+        }
+
+        return activationTimestamp + meditationLifetimeMs;
+    };
+
+    const isTaskExpired = (task) => {
+        const expirationTimestamp = getTaskExpirationTimestamp(task);
+
+        return expirationTimestamp !== null && Date.now() >= expirationTimestamp;
+    };
+
+    const closeExpiredMeditationView = () => {
+        clearExpirationTimer();
+        hideSheet();
+        clearSheet();
+
+        if (activeTask && activeTask.id) {
+            localStorage.removeItem(storageTaskKey);
+        }
+
+        activeTask = null;
+        setStatus("La vue meditation a ete fermee car le delai de 24h apres activation est depasse.", "is-error");
+        window.location.href = "commencer.html";
+    };
+
+    const scheduleExpiration = (task) => {
+        clearExpirationTimer();
+
+        const expirationTimestamp = getTaskExpirationTimestamp(task);
+
+        if (expirationTimestamp === null) {
+            return;
+        }
+
+        const remainingTime = expirationTimestamp - Date.now();
+
+        if (remainingTime <= 0) {
+            closeExpiredMeditationView();
+            return;
+        }
+
+        expirationTimerId = window.setTimeout(() => {
+            closeExpiredMeditationView();
+        }, remainingTime);
+    };
+
     const getCompletedTaskIds = () => {
         const raw = localStorage.getItem(completedTasksKey);
 
@@ -162,14 +286,45 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         localStorage.removeItem(storageTaskKey);
+        removeTaskActivationTimestamp(activeTask.id);
+        clearExpirationTimer();
+        window.dispatchEvent(
+            new CustomEvent("meditationTaskStatusChanged", {
+                detail: {
+                    taskId: taskId,
+                    status: "completed"
+                }
+            })
+        );
     };
 
     const openFromTask = (task, message) => {
+        if (!task || !task.id) {
+            hideSheet();
+            setStatus("Aucune tache de meditation active pour le moment.", "is-error");
+            return;
+        }
+
+        let activationTimestamp = getTaskActivationTimestamp(task.id);
+
+        if (!activationTimestamp) {
+            activationTimestamp = setTaskActivationTimestamp(task.id);
+        }
+
+        if (Date.now() >= activationTimestamp + meditationLifetimeMs) {
+            localStorage.removeItem(storageTaskKey);
+            hideSheet();
+            setStatus("La vue meditation est fermee car les 24h apres activation sont depassees.", "is-error");
+            window.location.href = "commencer.html";
+            return;
+        }
+
         clearSheet();
         applyTaskToSheet(task);
         localStorage.setItem(storageTaskKey, JSON.stringify(task));
         showSheet();
         setStatus(message, "is-success");
+        scheduleExpiration(task);
 
         fetch("PHP/get_meditation_sheet.php?task_id=" + encodeURIComponent(task.id), {
             method: "GET",
@@ -240,6 +395,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     markTaskAsCompleted();
                     setStatus(data.message, "is-success");
+                    hideSheet();
+                    clearSheet();
+                    activeTask = null;
                     window.location.href = "commencer.html";
                 })
                 .catch((error) => {
@@ -255,6 +413,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const storedTask = getStoredTask();
 
     if (storedTask && storedTask.id) {
+        if (isTaskExpired(storedTask)) {
+            localStorage.removeItem(storageTaskKey);
+            hideSheet();
+            setStatus("La vue meditation est fermee car les 24h apres activation sont depassees.", "is-error");
+            window.location.href = "commencer.html";
+            return;
+        }
+
         openFromTask(
             storedTask,
             "La fiche est ouverte pour la tache selectionnee " +

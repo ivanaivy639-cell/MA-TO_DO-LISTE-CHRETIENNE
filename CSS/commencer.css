@@ -107,6 +107,17 @@ body::after {
   box-shadow: 0 10px 24px rgba(143, 95, 109, 0.12);
 }
 
+.tasks-board-body .tache-completed {
+  border-color: rgba(88, 145, 102, 0.4);
+  background: rgba(243, 251, 245, 0.96);
+  box-shadow: 0 10px 24px rgba(88, 145, 102, 0.08);
+}
+
+.tasks-board-body .tache-expired {
+  border-color: rgba(183, 124, 82, 0.38);
+  background: rgba(255, 248, 242, 0.96);
+}
+
 .tasks-board-body .tache-active:hover {
   transform: translateY(-1px);
 }
