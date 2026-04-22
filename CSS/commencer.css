@@ -134,6 +134,7 @@ body::after {
   height: 16px;
   accent-color: var(--accent-strong);
   flex: 0 0 auto;
+  cursor: default;
 }
 
 .tasks-board-body .tache h3 {
@@ -152,6 +153,26 @@ body::after {
   color: var(--accent-strong);
   font-size: 0.72rem;
   font-weight: 700;
+}
+
+.task-state-active {
+  background: rgba(182, 132, 143, 0.16);
+  color: var(--accent-strong);
+}
+
+.task-state-completed {
+  background: rgba(88, 145, 102, 0.16);
+  color: #3e7b4b;
+}
+
+.task-state-expired {
+  background: rgba(183, 124, 82, 0.16);
+  color: #a35d2e;
+}
+
+.tache-completed h3,
+.tache-completed .task-info-box span {
+  color: #4a6e54;
 }
 
 .task-info-grid {
