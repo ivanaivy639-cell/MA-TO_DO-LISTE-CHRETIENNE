@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etude biblique</title>
+    <link rel="stylesheet" href="CSS/vuemeditation.css">
+</head>
+<body>
+    <div id="meditation-status" class="page-status" aria-live="polite">
+        Verification de la tache de meditation en cours...
+    </div>
+
+    <main class="sheet is-hidden" id="meditation-sheet">
+        <header class="sheet-header">
+            <h1>Etude biblique</h1>
+            <p>Feuille de meditation et d'observation</p>
+        </header>
+
+       
+
+        <section class="grid-top">
+            <div class="field">
+                <label for="date-etude">Date</label>
+                <input type="date" id="date-etude" name="date-etude">
+            </div>
+        </section>
+
+        <section class="field verse-box">
+            <label for="texte-verset">Texte de meditation</label>
+            <textarea id="texte-verset" name="texte-verset" placeholder="Ecris ici le passage biblique..."></textarea>
+        </section>
+
+        <section class="double-grid">
+            <article class="lined-box">
+                <h2 class="block-title">Contexte</h2>
+                <textarea id="contexte" name="contexte" placeholder="Contexte du passage..."></textarea>
+            </article>
+
+            <article class="frame-box">
+                <h2 class="block-title">Mots cles</h2>
+                <textarea id="mots-cles" name="mots-cles" placeholder="Liste les mots cles importants..."></textarea>
+            </article>
+        </section>
+ <h2 class="section-title">Definition des mots cles</h2>
+
+        <section class="keywords">
+            <article class="keyword-card">
+                <div class="keyword-grid">
+                    <div class="field">
+                        <label for="definition-biblique">Definition biblique</label>
+                        <textarea id="definition-biblique" name="definition-biblique" placeholder="Definition selon le contexte biblique..."></textarea>
+                    </div>
+                    <div class="field">
+                        <label for="definition-standard">Definition standard</label>
+                        <textarea id="definition-standard" name="definition-standard" placeholder="Definition courante ou dictionnaire..."></textarea>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="versions">
+            <div class="version-card">
+                <div class="label">Version 1</div>
+                <textarea id="version-1" name="version-1" placeholder="Autre traduction ou observation..."></textarea>
+            </div>
+
+            <div class="version-card">
+                <div class="label">Version 2</div>
+                <textarea id="version-2" name="version-2" placeholder="Autre traduction ou observation..."></textarea>
+            </div>
+        </section>
+
+       
+        <section class="field">
+            <label for="verset-marquant">Verset marquant</label>
+            <textarea id="verset-marquant" name="verset-marquant" placeholder="Le verset qui te touche le plus et pourquoi..."></textarea>
+        </section>
+
+        <h2 class="section-title">Reflexion thematique</h2>
+
+        <section class="reflection">
+            <textarea id="reflexion" name="reflexion" placeholder="Note ici ta reflexion, ce que Dieu t'enseigne, les applications pratiques et les prieres inspirees par ce texte..."></textarea>
+        </section>
+         <section class="decision">
+            <textarea id="decision" name="decision" placeholder="Note ici ta decision, ce que tu vas mettre en pratique..."></textarea>
+        </section>
+         <section class="acte pour realiser ces decisions">
+            <textarea id="acte" name="acte" placeholder="Note ici l'acte que tu vas accomplir pour realiser ces decisions..."></textarea>
+        </section>
+        <h2 class="section-title">Priere</h2>
+        <section class="prayer">
+            <textarea id="prayer" name="prayer" placeholder="Ecris ici ta prière inspirée par ce passage..."></textarea>
+        </section>
+         <div class="sheet-toolbar">
+            <button type="button" id="save-meditation" class="save-button">Enregistrer</button>
+        </div>
+    </main>
+    <script src="JS/vuemeditation.js"></script>
+</body>
+</html>
