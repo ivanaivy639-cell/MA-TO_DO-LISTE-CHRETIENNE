@@ -1,3 +1,5 @@
+localStorage.removeItem("activeMeditationTask");
+
 document.querySelectorAll(".save").forEach(function(button) {
   button.addEventListener("click", function(e) {
     e.preventDefault();
@@ -38,6 +40,10 @@ document.querySelectorAll(".save").forEach(function(button) {
         textInput.value = "";
         dateInput.value = "";
         timeInputs.forEach(input => input.value = "");
+
+        if (typeof affichertaches === "function") {
+          affichertaches();
+        }
       }
     })
     .catch(error => {
@@ -58,3 +64,7 @@ document.querySelectorAll(".cancel").forEach(function(button) {
     }   
   }
 )});
+
+if (typeof affichertaches === "function") {
+  affichertaches();
+}
